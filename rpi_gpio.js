@@ -32,3 +32,14 @@ RPiGPIO.Actor = function (name) {
     },
   };
 };
+
+RPiGPIO.List = function (done) {
+  send("list", function(data) {
+    try {
+      done(JSON.parse(data));
+    }
+    catch (e) {
+      done("ERROR_PARSING");
+    }
+  });
+};

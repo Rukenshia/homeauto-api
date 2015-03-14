@@ -22,7 +22,10 @@ http.createServer(function(request,response){
 	}
 	else {
 		fn(function (data) {
-			response.write("Command: " + request.url + "<br />Return Data: " + data);
+			response.write(JSON.stringify({
+				command: request.url.substr(1, request.url.length),
+				response: data
+			}));
 			response.end();
 		});
 	}
@@ -41,6 +44,12 @@ function requestToCommand (requestPath) {
 
 	var actor = args[0];
 	args.splice(0,1);
+
+	if (actor == "list") {
+		return function (done) {
+			RPi.List(done);
+		};
+	}
 
 	if (args.length === 0) {
 		return undefined;
