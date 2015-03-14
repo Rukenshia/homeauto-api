@@ -39,6 +39,7 @@ RPiGPIO.List = function (done) {
       done(JSON.parse(data));
     }
     catch (e) {
+      console.log(data);
       done("ERROR_PARSING");
     }
   });
