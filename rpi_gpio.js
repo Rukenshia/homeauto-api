@@ -23,6 +23,10 @@ RPiGPIO.Actor = function (name) {
       }
       send(command, done);
     },
+    toggle: function (done) {
+      var command = "actor toggle " + name;
+      send(command, done);
+    },
     direction: function (done, opt_dir) {
       var command = "actor get " + name + " direction";
       if (typeof opt_dir !== "undefined") {

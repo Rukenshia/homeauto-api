@@ -74,6 +74,13 @@ function requestToCommand (requestPath) {
 				}, args[0]);
 			};
 		break;
+		case "toggle":
+			fn = function (done) {
+				RPi.Actor(actor).toggle(function (retn) {
+					done(retn);
+				});
+			};
+		break;
 	}
 
 	return fn;
