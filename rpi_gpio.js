@@ -34,7 +34,7 @@ RPiGPIO.Actor = function (name) {
 };
 
 RPiGPIO.List = function (done) {
-  send("list", function(data) {
+  send("actor list", function(data) {
     try {
       done(JSON.parse(data));
     }
