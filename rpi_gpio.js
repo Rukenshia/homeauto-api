@@ -49,12 +49,6 @@ RPiGPIO.List = function (done) {
     EntityName: "",
     Args: []
   }, function(data) {
-    try {
-      done(JSON.parse(data));
-    }
-    catch (e) {
-      console.log(data);
-      done("ERROR_PARSING");
-    }
+    done(data);
   });
 };

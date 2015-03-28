@@ -22,10 +22,7 @@ http.createServer(function(request,response){
 	}
 	else {
 		fn(function (data) {
-			response.write(JSON.stringify({
-				command: request.url.substr(1, request.url.length),
-				response: data
-			}));
+			response.write(data);
 			response.end();
 		});
 	}
