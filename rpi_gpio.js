@@ -44,7 +44,11 @@ RPiGPIO.Actor = function (name) {
 };
 
 RPiGPIO.List = function (done) {
-  send("actor list", function(data) {
+  send({
+    Command: "list",
+    EntityName: "",
+    Args: []
+  }, function(data) {
     try {
       done(JSON.parse(data));
     }
