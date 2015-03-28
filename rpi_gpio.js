@@ -6,7 +6,7 @@
  */
 
 var RPiGPIO = module.exports;
-var comms = new (require('./communicator.js'))("192.168.178.39", 4200);
+var comms = new (require('./communicator.js'))("0.0.0.0", 4200);
 
 function send (command, done) {
   comms.send(JSON.stringify(command), function (message) {
