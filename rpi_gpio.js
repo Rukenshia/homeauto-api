@@ -9,7 +9,7 @@ var RPiGPIO = module.exports;
 var comms = new (require('./communicator.js'))("192.168.178.39", 4200);
 
 function send (command, done) {
-  comms.send(command, function (message) {
+  comms.send(JSON.stringify(command), function (message) {
     done(message);
   });
 }
@@ -17,21 +17,27 @@ function send (command, done) {
 RPiGPIO.Actor = function (name) {
   return {
     state: function (done, opt_state) {
-      var command = "actor get " + name;
-      if (typeof opt_state !== "undefined") {
-        command = "actor set " + name + " " + opt_state;
-      }
+      var command = {
+        Command: "state",
+        EntityName: name,
+        Args: (typeof opt_state !== "undefined") ? [opt_state] : []
+      };
       send(command, done);
     },
     toggle: function (done) {
-      var command = "actor toggle " + name;
+      var command = {
+        Command: "toggle",
+        EntityName: name,
+        Args: []
+      };
       send(command, done);
     },
     direction: function (done, opt_dir) {
-      var command = "actor get " + name + " direction";
-      if (typeof opt_dir !== "undefined") {
-        command = "actor set " + name + " direction " + opt_dir;
-      }
+      var command = {
+        Command: "direction",
+        EntityName: name,
+        Args: (typeof opt_dir !== "undefined") ? [opt_dir] : []
+      };
       send(command, done);
     },
   };
